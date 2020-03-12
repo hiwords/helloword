@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router)
-const EMPTY = () => import('@/pages/layout/empty')
+// const EMPTY = () => import('@/pages/layout/empty')
 const LAYOUT = () => import('@/pages/layout/layout')
 let routesOpt = [
     {
@@ -14,19 +14,19 @@ let routesOpt = [
         children: [
             {
                 path: 'list',
-                name: 'list',
+                name: 'rolesList',
                 meta:{
                     title: '列表',
                     icon: 'alibaba'
                 },
-                component: EMPTY
+                component: () => import("@/pages/roles/list")
             },
             {
                 path: 'setting',
-                name: 'setting',
+                name: 'baseSetting',
                 meta:{
-                    title: '设置',
-                    icon: 'menu-data-center',
+                    title: '基础设置',
+                    icon: 'setting',
                     breadcrumb: true
                 },
                 component: () => import("@/pages/setting/setting")

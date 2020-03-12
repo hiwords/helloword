@@ -52,20 +52,20 @@ module.exports = {
         port: 8181,
         https: false,
         // 配置跨域
-        // proxy: {
-        //     '/api': {
-        //         // 是否支持webSocket
-        //         ws: true,
-        //         // 代理目标地址
-        //         target: 'http://106.52.206.103:20020',
-        //         // 跨域许可
-        //         changOrigin: true,
-        //         // 重写路径
-        //         pathRewrite: {
-        //             '^/api': ''
-        //         }
-        //     }
-        // }
+        proxy: {
+            '/api': {
+                // 是否支持webSocket
+                ws: true,
+                // 代理目标地址
+                target: 'http://localhost:3000',
+                // 跨域许可
+                changOrigin: true,
+                // 重写路径
+                pathRewrite: {
+                    '^/api': ''
+                }
+            }
+        }
     },
     // 禁用生产环境下的map包 | default => true
     productionSourceMap: false,
