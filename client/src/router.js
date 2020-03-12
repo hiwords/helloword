@@ -13,6 +13,15 @@ let routesOpt = [
         component: LAYOUT,
         children: [
             {
+                path: 'list',
+                name: 'list',
+                meta:{
+                    title: '列表',
+                    icon: 'alibaba'
+                },
+                component: EMPTY
+            },
+            {
                 path: 'setting',
                 name: 'setting',
                 meta:{
@@ -20,8 +29,8 @@ let routesOpt = [
                     icon: 'menu-data-center',
                     breadcrumb: true
                 },
-                component: EMPTY
-            }
+                component: () => import("@/pages/setting/setting")
+            },
         ]
     }
 ]
