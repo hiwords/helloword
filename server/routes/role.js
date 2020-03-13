@@ -1,13 +1,32 @@
 const router = require('koa-router')()
 
-router.prefix('/api/role')
+router.prefix('/')
 
 router.get('/', function (ctx, next) {
-    ctx.body = 'this is a users response!'
+    let body = ctx.request.body
+    console.log(body)
+    ctx.body = 'this is a api response!'
 })
 
-router.get('/bar', function (ctx, next) {
-    ctx.body = 'this is a users/bar response'
+router.get('/role', function (ctx, next) {
+    let body = ctx.request.body
+    console.log(body)
+    ctx.body = 'this is a api/role response'
+})
+
+router.get('/role/list', function (ctx, next) {
+    ctx.body = {
+        status: 200,
+        info: "get",
+        data: [{name: '新'},{name: '中'},{name: '国'},{name: '万'},{name: '岁'},]
+    }
+})
+router.post('/role/list', function (ctx, next) {
+    ctx.body = {
+        status: 200,
+        info: "post",
+        data: [{name: '新'},{name: '中'},{name: '国'},{name: '万'},{name: '岁'},]
+    }
 })
 
 module.exports = router

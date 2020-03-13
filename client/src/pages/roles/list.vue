@@ -6,9 +6,11 @@
 import {list} from '@/api/role'
 export default {
     created(){
-        list()
+        list({
+            user: '11'
+        })
         .then(res => {
-            console.log(res)
+            console.log(res.data)
         })
         .catch(err => {
             console.error(err)
