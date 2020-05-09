@@ -21,13 +21,10 @@ router.post('/create',async function (ctx, next) {
         data: []
     };
     if(body.name){
-        let {name, birthday, live, level} = body
-        
-        let result
-        create(name).then(res => {
-            console.log("res:::",res)
+        let {name} = body
+        await create(name).then(res => {
+            responseBody.data = res
         })
-        responseBody.data = result
     } else {
         responseBody = {
             status: 10001,
@@ -35,7 +32,6 @@ router.post('/create',async function (ctx, next) {
             data: {}
         }
     }
-    console.log("responseBody:", responseBody)
     ctx.body = responseBody
 })
 
