@@ -2,7 +2,7 @@
     a-menu(
         theme="dark"
         mode="inline"
-        :defaultSelectedKeys="['1']"
+        :defaultSelectedKeys="[]"
     )
         template(v-for="item in cpt_menuList")
             a-menu-item(

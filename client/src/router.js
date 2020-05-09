@@ -8,18 +8,28 @@ let routesOpt = [
     {
         path: '/',
         meta: {
-            title: '菜单栏路由'
+            title: '起始页'
         },
+        // redirect: {name: 'welcome'},
         component: LAYOUT,
         children: [
             {
-                path: 'list',
+                path: 'roles/list',
                 name: 'rolesList',
                 meta:{
-                    title: '列表',
+                    title: '角色',
                     icon: 'alibaba'
                 },
                 component: () => import("@/pages/roles/list")
+            },
+            {
+                path: 'level/list',
+                name: 'levelList',
+                meta:{
+                    title: '等级',
+                    icon: 'sketch'
+                },
+                component: () => import("@/pages/level/list")
             },
             {
                 path: 'setting',

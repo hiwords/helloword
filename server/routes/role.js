@@ -1,32 +1,67 @@
 const router = require('koa-router')()
+const {roleModel} = require('../DB/level')
+router.prefix('/role')
 
-router.prefix('/')
+let dbErrorResponse = {
+    status: -1,
+    info: "db save error",
+    data: {}
+}
 
-router.get('/', function (ctx, next) {
-    let body = ctx.request.body
-    console.log(body)
-    ctx.body = 'this is a api response!'
+router.post('/list',async function (ctx, next) {
+    let responseBody;
+    await roleModel.find((err, roleList) => {
+            if(err){
+                console.log("db error::", err)
+                responseBody = dbErrorResponse
+            } else {
+                responseBody = {
+                    status: 200,
+                    info: "success",
+                    data: roleList.map( role => {
+                        let {name, birthday, live, level} = role
+                        return {name, birthday, live, level}
+                    })
+                }
+            }
+            console.log(responseBody)
+        })
+        ctx.body = responseBody
 })
 
-router.get('/role', function (ctx, next) {
-    let body = ctx.request.body
-    console.log(body)
-    ctx.body = 'this is a api/role response'
-})
-
-router.get('/role/list', function (ctx, next) {
-    ctx.body = {
-        status: 200,
-        info: "get",
-        data: [{name: '新'},{name: '中'},{name: '国'},{name: '万'},{name: '岁'},]
+router.post('/creat',async function (ctx, next) {
+    let body = ctx.request.body;
+    let responseBody;
+    if(body.name){
+        let {name, birthday, live, level} = body 
+        let newRole = new roleModel({
+            name,
+            birthday,
+            live,
+            level
+        })
+        
+        await newRole.save((err, result) => {
+            if(err){
+                console.log("db error::", err)
+                responseBody = dbErrorResponse
+            } else {
+                resBody = {
+                    status: 200,
+                    info: "success",
+                    data: result
+                }
+            }
+        })
+    } else {
+        responseBody = {
+            status: 10001,
+            info: "角色名是必填的",
+            data: {}
+        }
     }
+    ctx.body = responseBody
 })
-router.post('/role/list', function (ctx, next) {
-    ctx.body = {
-        status: 200,
-        info: "post",
-        data: [{name: '新'},{name: '中'},{name: '国'},{name: '万'},{name: '岁'},]
-    }
-})
+
 
 module.exports = router
